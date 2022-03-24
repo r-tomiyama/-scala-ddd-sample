@@ -3,7 +3,10 @@
 ### アプリ実行
 
 ```bash
-sbt run
+sbt
+
+sbt:root> project presentation
+sbt:presentation> run
 ```
 
 ### テスト

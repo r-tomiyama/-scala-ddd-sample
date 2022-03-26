@@ -14,8 +14,9 @@ lazy val root = (project in file("."))
   .aggregate(
     presentation,
     application,
-    domain,
-    infrastructure
+    domainService,
+    infrastructure,
+    domainModel
   )
 
 lazy val presentation = (project in file("presentation"))
@@ -24,10 +25,16 @@ lazy val presentation = (project in file("presentation"))
 
 lazy val application = (project in file("application"))
   .settings(commonSettings)
-  .dependsOn(domain, infrastructure)
+  .dependsOn(domainService, infrastructure, domainModel)
 
-lazy val domain = (project in file("domain"))
+lazy val domainService = (project in file("domainService"))
   .settings(commonSettings)
+  .dependsOn(infrastructure, domainModel)
 
 lazy val infrastructure = (project in file("infrastructure"))
   .settings(commonSettings)
+  .dependsOn(domainModel)
+
+lazy val domainModel = (project in file("domainModel"))
+  .settings(commonSettings)
+

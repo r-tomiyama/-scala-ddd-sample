@@ -6,7 +6,7 @@
 sbt
 
 sbt:root> project presentation
-sbt:presentation> run
+sbt:presentation> run NAME
 ```
 
 ### テスト

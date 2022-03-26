@@ -1,10 +1,12 @@
 package presentation
 
-import application._
+import application.UserUsecase
 
 object Main {
   def main(args: Array[String]): Unit = {
     println("hello world")
-    UserCreate.main
+
+    val userUsecase = UserUsecase()
+    userUsecase.create(args.head)
   }
 }

@@ -9,4 +9,7 @@ object Main {
     val userUsecase = UserUsecase()
     userUsecase.create(args.head)
   }
+
+  // TODO: テスト書く
+  // TODO: サークル機能を作る
 }

@@ -18,6 +18,7 @@ class UserUsecase(
       println("ユーザ作れません")
     }
   }
+  // TODO:  取得・更新・削除を作る
 }
 
 object UserUsecase {

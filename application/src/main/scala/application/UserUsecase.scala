@@ -8,15 +8,16 @@ class UserUsecase(
     val userService: UserService,
     val userRepository: UserRepository
 ) {
-  def create(name: String): Unit = {
-    val user = User(name)
-
-    if (userService.exist(user)) {
-      userRepository.save(user)
-      println("ユーザ作ったよ")
-    } else {
-      println("ユーザ作れません")
-    }
+  def create(name: String): String = {
+    val user = User.from(name)
+    user.fold(_ => "ユーザ作れません", user => {
+      if (userService.exist(user)) {
+        userRepository.save(user)
+        "ユーザ作ったよ"
+      } else {
+        "ユーザ作れません"
+      }
+    })
   }
   // TODO:  取得・更新・削除を作る
 }

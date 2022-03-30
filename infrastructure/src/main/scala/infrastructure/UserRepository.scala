@@ -9,7 +9,11 @@ class UserRepository {
   // TODO: トランザクションを取り入れる
   def find(user: User): Option[User] = {
     // 永続化サービスアクセス
-    Some(user)
+    if (user.name.value == "すでにある名前") {
+      None
+    } else {
+      Some(user)
+    }
   }
 
   def save(user: User): Try[User] = {

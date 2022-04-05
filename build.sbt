@@ -7,7 +7,9 @@ ThisBuild / organizationName := "example"
 
 lazy val commonSettings = Seq(
   scalaVersion := "2.12.8",
-  libraryDependencies += scalaTest % Test
+  libraryDependencies += scalaTest % Test,
+  libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.5.6" % "provided",
+  libraryDependencies += "org.mockito" % "mockito-core" % "4.4.0" % "test"
   )
 
 lazy val root = (project in file("."))

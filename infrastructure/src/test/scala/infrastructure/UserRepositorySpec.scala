@@ -8,7 +8,7 @@ class UserRepositorySpec extends FlatSpec {
   val userRepository = new UserRepository
 
   "find" should "一致するユーザーを返す" in {
-    val user = User("id", "なまえ")
+    val user = User("id", "すでにある名前")
     assert(userRepository.find(user) === Some(user))
   }
 

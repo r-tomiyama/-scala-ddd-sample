@@ -3,9 +3,8 @@ package domainModel
 case class UserId private (value: String)
 
 object UserId {
-  def apply(): UserId = {
+  def apply(): UserId =
     new UserId("id")
-  }
 
   def apply(value: String): UserId = {
     if (value.length < 1) {

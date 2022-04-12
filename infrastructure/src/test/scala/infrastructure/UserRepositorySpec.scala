@@ -5,7 +5,7 @@ import org.scalatest.FlatSpec
 
 class UserRepositorySpec extends FlatSpec {
 
-  val userRepository = new UserRepository
+  val userRepository = new UserRepositoryImpl
 
   "find" should "一致するユーザーを返す" in {
     val user = User("id", "すでにある名前")

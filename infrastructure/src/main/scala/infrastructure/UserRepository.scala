@@ -3,20 +3,24 @@ package infrastructure
 import domainModel.User
 
 import scala.util.Try
-//trait UserRepository {
-//  def find
-//}
-class UserRepository {
+
+trait UserRepository {
+  def find(user: User): Option[User]
+  def save(user: User): Try[User]
+}
+
+class UserRepositoryImpl extends UserRepository {
   // TODO: ID採番方法をDB依存に変える（ファクトリ）
   // TODO: トランザクションを取り入れる
-  def find(user: User): Option[User] =
-    // 永続化サービスアクセス
+  def find(user: User) =
+  // 永続化サービスアクセス
     if (user.name.value == "すでにある名前")
       Some(user)
     else
-    None
+      None
 
-  def save(user: User): Try[User] =
-    // 永続化サービスアクセス
+  def save(user: User) =
+  // 永続化サービスアクセス
     Try(user)
 }
+

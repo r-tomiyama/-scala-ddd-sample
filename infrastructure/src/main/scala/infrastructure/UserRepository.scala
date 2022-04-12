@@ -3,7 +3,9 @@ package infrastructure
 import domainModel.User
 
 import scala.util.Try
-
+//trait UserRepository {
+//  def find
+//}
 class UserRepository {
   // TODO: ID採番方法をDB依存に変える（ファクトリ）
   // TODO: トランザクションを取り入れる

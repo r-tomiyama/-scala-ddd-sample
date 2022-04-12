@@ -11,13 +11,14 @@ import org.scalatest.Matchers._
 import scala.util.Failure
 
 class UserUsecaseSpec extends FlatSpec {
-  private lazy val userRepositoryMock: UserRepository = mock(classOf[UserRepository])
-  private lazy val userServiceMock: UserService = mock(classOf[UserService])
+  val userRepositoryMock: UserRepository = mock(classOf[UserRepository])
 
-  private val userUsecaseModule: UserUsecaseModule = new UserUsecaseModule {
-    override lazy val userRepository = userRepositoryMock
-    override lazy val userService = userServiceMock
+  trait UserUsecaseModuleForTest extends UserUsecaseModule {
+    override lazy val userRepository: UserRepository = userRepositoryMock
+    override lazy val userService: UserService = mock(classOf[UserService])
   }
+
+  object UserUsecaseForTest extends UserUsecaseModuleForTest
 
   "create" should "ユーザーを作成し、成功メッセージを返す" in {
     assert(UserUsecase.create("なまえ") == "ユーザ作ったよ")
@@ -32,9 +33,8 @@ class UserUsecaseSpec extends FlatSpec {
   }
 
   it should "ユーザーを作成せず、エラーメッセージを返す（DB保存の失敗）" in {
-    // TODO: mockうまくいっていない
     when(userRepositoryMock.save(any[User])).thenReturn(Failure(new RuntimeException))
-    assert(userUsecaseModule.create("なまえ") === "ユーザ作れません")
+    assert(UserUsecaseForTest.create("なまえ") === "ユーザ作れません")
   }
 
 }

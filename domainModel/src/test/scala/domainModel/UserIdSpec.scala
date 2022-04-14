@@ -9,4 +9,12 @@ class UserIdSpec extends FlatSpec {
     an[RuntimeException] should be thrownBy UserId("")
   }
 
+  "from" should "ユーザーを作成する" in {
+    assert(UserId.from("id").isSuccess)
+  }
+
+  it should "ユーザーに失敗する" in {
+    assert(User.from("").isFailure)
+  }
+
 }

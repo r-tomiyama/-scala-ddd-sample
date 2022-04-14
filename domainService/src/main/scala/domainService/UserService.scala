@@ -5,6 +5,6 @@ import infrastructure.UserRepository
 
 class UserService(val userRepository: UserRepository) {
   def exist(user: User): Boolean =
-    userRepository.find(user.name.value).nonEmpty
+    userRepository.find(user.name).nonEmpty
 
 }

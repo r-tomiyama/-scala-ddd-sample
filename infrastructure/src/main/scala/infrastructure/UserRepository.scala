@@ -1,11 +1,11 @@
 package infrastructure
 
-import domainModel.{User, UserId}
+import domainModel.{User, UserId, UserName}
 
 import scala.util.Try
 
 trait UserRepository {
-  def find(name: String): Option[User]
+  def find(name: UserName): Option[User]
   def find(user: UserId): Option[User]
   def save(user: User): Try[User]
 }
@@ -13,14 +13,15 @@ trait UserRepository {
 class UserRepositoryImpl extends UserRepository {
   // TODO: ID採番方法をDB依存に変える（ファクトリ）
   // TODO: トランザクションを取り入れる
-  def find(name: String): Option[User] =
+  def find(userName: UserName): Option[User] =
     // 永続化サービスアクセス
-    if (name == "すでにある名前")
-      Some(User("1", name))
+    if (userName.value == "すでにある名前")
+      Some(User("1", userName.value))
     else
       None
 
-  def find(userId: UserId) =
+  def find(userId: UserId): Option[User] =
+    // 永続化サービスアクセス
     if (userId.value == "1")
       Some(User("1", "すでにある名前"))
     else

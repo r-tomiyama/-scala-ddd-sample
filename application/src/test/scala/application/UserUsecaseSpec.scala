@@ -1,6 +1,6 @@
 package application
 
-import domainModel.{User, UserId}
+import domainModel.{User, UserId, UserName}
 import infrastructure.UserRepository
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
@@ -14,7 +14,7 @@ class UserUsecaseSpec extends FlatSpec {
       saveUser: Try[User] = Failure(new RuntimeException(""))
   ): UserUsecaseModule = {
     class UserRepositoryImplForTest extends UserRepository {
-      override def find(name: String): Option[User] = findUser
+      override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
       override def save(user: User): Try[User] = saveUser
     }
@@ -46,7 +46,7 @@ class UserUsecaseSpec extends FlatSpec {
     assert(UserUsecase.find("1") == Success(dto.User("1", "すでにある名前")))
   }
 
-  "find" should "ユーザーを検索せず、失敗を返す" in {
+  it should "ユーザーを検索せず、失敗を返す" in {
     assert(UserUsecase.find("").isFailure)
   }
 

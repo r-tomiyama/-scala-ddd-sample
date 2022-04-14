@@ -1,5 +1,7 @@
 package domainModel
 
+import scala.util.Try
+
 case class UserId private (value: String)
 
 object UserId {
@@ -12,4 +14,8 @@ object UserId {
     }
     new UserId(value)
   }
+
+  def from(value: String): Try[UserId] =
+    Try(UserId(value))
+
 }

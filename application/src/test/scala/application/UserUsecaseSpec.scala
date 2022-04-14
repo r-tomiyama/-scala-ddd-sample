@@ -9,13 +9,17 @@ import scala.util.{Failure, Try}
 
 class UserUsecaseSpec extends FlatSpec {
 
-  def userUsecaseForTest(findUser: Option[User] = None, saveUser: Try[User] = Failure(new RuntimeException(""))): UserUsecaseModule = {
+  def userUsecaseForTest(
+      findUser: Option[User] = None,
+      saveUser: Try[User] = Failure(new RuntimeException(""))
+  ): UserUsecaseModule = {
     class UserRepositoryImplForTest extends UserRepository {
       def find(user: User) = findUser
       def save(user: User) = saveUser
     }
     object UserUsecaseForTest extends UserUsecaseModule {
-      override lazy val userRepository: UserRepository = new UserRepositoryImplForTest()
+      override lazy val userRepository: UserRepository =
+        new UserRepositoryImplForTest()
     }
 
     UserUsecaseForTest

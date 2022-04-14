@@ -16,7 +16,8 @@ trait UserUsecaseModule {
   def create(name: String): String =
     (for {
       user <- User.from(name)
-      _ <- if (userService.exist(user)) Failure(new RuntimeException("")) else Success(())
+      _ <- if (userService.exist(user)) Failure(new RuntimeException(""))
+      else Success(())
       _ <- userRepository.save(user)
     } yield user) match {
       case Success(_) => "ユーザ作ったよ"

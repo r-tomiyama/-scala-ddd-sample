@@ -1,7 +1,7 @@
 package application
 
 import com.softwaremill.macwire.wire
-import domainModel.{User, UserId}
+import domainModel.{User, UserId, UserName}
 import domainService.UserService
 import infrastructure.{UserRepository, UserRepositoryImpl}
 
@@ -31,5 +31,19 @@ trait UserUsecaseModule {
       }
     } yield user
 
-  // TODO:  更新・削除を作る
+  def update(id: String, name: String): Try[dto.User] =
+    (for {
+      userId <- UserId.from(id)
+      user <- userRepository.find(userId) match {
+        case Some(u) => Success(u)
+        case None    => Failure(new RuntimeException("存在しないID"))
+      }
+      newUser <- user.changeName(name)
+      _ <- if (userService.exist(newUser))
+        Failure(new RuntimeException("すでに利用されている名前"))
+      else Success(())
+      _ <- userRepository.save(newUser)
+    } yield newUser).map(dto.User.from)
+
+  // TODO:  削除を作る
 }

@@ -6,7 +6,7 @@ import scala.io.StdIn
 import scala.util.{Failure, Success}
 
 object Main {
-  val operations = List("create_user", "find_user")
+  val operations = List("create_user", "find_user", "update_user")
 
   def main(args: Array[String]): Unit = {
     println(s"行いたい操作を入力してください: ${operations.mkString(",")}")
@@ -19,6 +19,7 @@ object Main {
     val message = operation match {
       case "create_user" => create_user
       case "find_user"   => find_user
+      case "update_user" => update_user
       case _             => do_nothing
     }
     println(message)
@@ -47,6 +48,20 @@ object Main {
     UserUsecase.find(input) match {
       case Success(u) => s"id: ${u.id}, name: ${u.name}"
       case Failure(e) => s"ユーザは取得できませんでした（${e.getMessage}）"
+    }
+  }
+
+  def update_user: String = {
+    println("更新したいユーザーのIDと名前を入力してください（半角スペース区切り）")
+
+    val inputs = StdIn.readLine().split(" ")
+    if (inputs.size == 2) {
+      UserUsecase.update(inputs(0), inputs(1)) match {
+        case Success(u) => s"更新しました（id: ${u.id}, name: ${u.name}）"
+        case Failure(e) => s"ユーザを更新できませんでした（${e.getMessage}）"
+      }
+    } else {
+      "入力形式が間違っています"
     }
   }
 

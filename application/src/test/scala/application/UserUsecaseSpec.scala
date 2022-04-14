@@ -50,4 +50,20 @@ class UserUsecaseSpec extends FlatSpec {
     assert(UserUsecase.find("").isFailure)
   }
 
+  "update" should "ユーザーを名更新し、ユーザー情報を返す" in {
+    assert(UserUsecase.update("1", "新しい名前") == Success(dto.User("1", "新しい名前")))
+  }
+
+  it should "ユーザーを更新せず、失敗を返す（存在しないID）" in {
+    assert(UserUsecase.update("999", "新しい名前").isFailure)
+  }
+
+  it should "ユーザーを更新せず、失敗を返す（すでに存在するユーザー名の場合）" in {
+    assert(UserUsecase.update("1", "すでにある名前").isFailure)
+  }
+
+  it should "ユーザーを更新せず、失敗を返す（不正な名前）" in {
+    assert(UserUsecase.update("1", "なま").isFailure)
+  }
+
 }

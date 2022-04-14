@@ -4,9 +4,7 @@ import scala.util.Try
 
 case class User private (id: UserId, name: UserName) {
   def changeName(newName: String): Try[User] =
-    Try {
-      User(id, UserName(newName))
-    }
+    Try(User(id, UserName(newName)))
 }
 
 object User {
@@ -15,7 +13,5 @@ object User {
   }
 
   def from(userName: String): Try[User] =
-    Try {
-      new User(UserId(), UserName(userName))
-    }
+    Try(new User(UserId(), UserName(userName)))
 }

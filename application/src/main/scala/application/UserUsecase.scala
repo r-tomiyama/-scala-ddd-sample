@@ -45,5 +45,13 @@ trait UserUsecaseModule {
       _ <- userRepository.save(newUser)
     } yield newUser).map(dto.User.from)
 
-  // TODO:  削除を作る
+  def delete(id: String): Try[Unit] =
+    for {
+      userId <- UserId.from(id)
+      user <- userRepository.find(userId) match {
+        case Some(u) => Success(u)
+        case None    => Failure(new RuntimeException("存在しないID"))
+      }
+      result <- userRepository.delete(user)
+    } yield result
 }

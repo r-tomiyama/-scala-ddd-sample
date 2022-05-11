@@ -6,7 +6,8 @@ import scala.io.StdIn
 import scala.util.{Failure, Success}
 
 object Main {
-  val operations = List("create_user", "find_user", "update_user")
+  val operations =
+    List("create_user", "find_user", "update_user", "delete_user")
 
   def main(args: Array[String]): Unit = {
     println(s"行いたい操作を入力してください: ${operations.mkString(",")}")
@@ -20,6 +21,7 @@ object Main {
       case "create_user" => create_user
       case "find_user"   => find_user
       case "update_user" => update_user
+      case "delete_user" => delete_user
       case _             => do_nothing
     }
     println(message)
@@ -62,6 +64,16 @@ object Main {
       }
     } else {
       "入力形式が間違っています"
+    }
+  }
+
+  def delete_user: String = {
+    println("削除したいユーザーのIDを入力してください")
+
+    val input = StdIn.readLine()
+    UserUsecase.delete(input) match {
+      case Success(_) => "ユーザーの削除が完了しました"
+      case Failure(e) => s"ユーザは削除できませんでした（${e.getMessage}）"
     }
   }
 

@@ -24,7 +24,22 @@ class UserRepositorySpec extends FlatSpec {
 
   it should "Noneを返す（ID検索）" in {
     val user = User("2", "なまえ")
-    assert(userRepository.find(UserId("2")).isEmpty)
+    assert(userRepository.find(user.id).isEmpty)
+  }
+
+  "save" should "ユーザーを保存し、ユーザーを返す" in {
+    val user = User("id", "なまえ")
+    assert(userRepository.save(user).get.eq(user))
+
+    //val savedUser = userRepository.find(user.id)
+    //assert(savedUser.get.eq(user))
+  }
+
+  "delete" should "ユーザーを削除する" in {
+    val user = User("id", "なまえ")
+    assert(userRepository.delete(user).isSuccess)
+
+    // assert(userRepository.find(user.id).isEmpty)
   }
 
 }

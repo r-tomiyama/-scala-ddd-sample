@@ -8,6 +8,7 @@ trait UserRepository {
   def find(name: UserName): Option[User]
   def find(user: UserId): Option[User]
   def save(user: User): Try[User]
+  def delete(user: User): Try[Unit]
 }
 
 class UserRepositoryImpl extends UserRepository {
@@ -30,4 +31,8 @@ class UserRepositoryImpl extends UserRepository {
   def save(user: User): Try[User] =
     // 永続化サービスアクセス
     Try(user)
+
+  def delete(user: User): Try[Unit] =
+    // 永続化サービスアクセス
+    Try(Unit)
 }

@@ -11,12 +11,14 @@ class UserUsecaseSpec extends FlatSpec {
 
   def userUsecaseForTest(
       findUser: Option[User] = None,
-      saveUser: Try[User] = Failure(new RuntimeException(""))
+      saveUser: Try[User] = Failure(new RuntimeException("")),
+      deleteResult: Try[Unit] =  Failure(new RuntimeException(""))
   ): UserUsecaseModule = {
     class UserRepositoryImplForTest extends UserRepository {
       override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
       override def save(user: User): Try[User] = saveUser
+      override def delete(user: User): Try[Unit] = deleteResult
     }
     object UserUsecaseForTest extends UserUsecaseModule {
       override lazy val userRepository: UserRepository =
@@ -64,6 +66,14 @@ class UserUsecaseSpec extends FlatSpec {
 
   it should "ユーザーを更新せず、失敗を返す（不正な名前）" in {
     assert(UserUsecase.update("1", "なま").isFailure)
+  }
+
+  "delete" should "ユーザーを削除し、成功を返す" in {
+    assert(UserUsecase.delete("1").isSuccess)
+  }
+
+  it should "ユーザーを削除せず、失敗を返す（存在しないユーザー）" in {
+    assert(userUsecaseForTest().delete("1").isFailure)
   }
 
 }

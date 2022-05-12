@@ -1,17 +1,10 @@
 package infrastructure
 
-import domainModel.user.{User, UserId, UserName}
+import domainModel.user.{User, UserId, UserName, IUserRepository}
 
 import scala.util.Try
 
-trait UserRepository {
-  def find(name: UserName): Option[User]
-  def find(user: UserId): Option[User]
-  def save(user: User): Try[User]
-  def delete(user: User): Try[Unit]
-}
-
-class UserRepositoryImpl extends UserRepository {
+class UserRepositoryImpl extends IUserRepository {
   // TODO: ID採番方法をDB依存に変える（ファクトリ）
   // TODO: トランザクションを取り入れる
   def find(userName: UserName): Option[User] =

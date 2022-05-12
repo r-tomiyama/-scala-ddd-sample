@@ -1,7 +1,6 @@
 package domainService
 
-import domainModel.user.{User, UserId, UserName}
-import infrastructure.UserRepository
+import domainModel.user.{IUserRepository, User, UserId, UserName}
 import org.scalatest.FlatSpec
 
 import scala.util.{Failure, Try}
@@ -12,7 +11,7 @@ class UserServiceSpec extends FlatSpec {
       findUser: Option[User] = None,
       saveUser: Try[User] = Failure(new RuntimeException(""))
   ): UserService = {
-    class UserRepositoryImplForTest extends UserRepository {
+    class UserRepositoryImplForTest extends IUserRepository {
       override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
       override def save(user: User): Try[User] = saveUser

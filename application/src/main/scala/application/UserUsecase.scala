@@ -1,16 +1,16 @@
 package application
 
 import com.softwaremill.macwire.wire
-import domainModel.user.{User, UserId}
+import domainModel.user.{User, UserId, IUserRepository}
 import domainService.UserService
-import infrastructure.{UserRepository, UserRepositoryImpl}
+import infrastructure.{UserRepositoryImpl}
 
 import scala.util.{Failure, Success, Try}
 
 object UserUsecase extends UserUsecaseModule
 
 trait UserUsecaseModule {
-  lazy val userRepository: UserRepository = wire[UserRepositoryImpl]
+  lazy val userRepository: IUserRepository = wire[UserRepositoryImpl]
   lazy val userService: UserService = wire[UserService]
 
   def create(name: String): Try[dto.User] =

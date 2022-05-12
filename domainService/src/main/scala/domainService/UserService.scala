@@ -1,9 +1,8 @@
 package domainService
 
-import domainModel.user.User
-import infrastructure.UserRepository
+import domainModel.user.{IUserRepository, User}
 
-class UserService(val userRepository: UserRepository) {
+class UserService(val userRepository: IUserRepository) {
   def exist(user: User): Boolean =
     userRepository.find(user.name).nonEmpty
 

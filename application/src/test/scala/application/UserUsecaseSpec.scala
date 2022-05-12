@@ -1,7 +1,6 @@
 package application
 
-import domainModel.user.{User, UserId, UserName}
-import infrastructure.UserRepository
+import domainModel.user.{User, UserId, UserName, IUserRepository}
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
 
@@ -14,14 +13,14 @@ class UserUsecaseSpec extends FlatSpec {
       saveUser: Try[User] = Failure(new RuntimeException("")),
       deleteResult: Try[Unit] = Failure(new RuntimeException(""))
   ): UserUsecaseModule = {
-    class UserRepositoryImplForTest extends UserRepository {
+    class UserRepositoryImplForTest extends IUserRepository {
       override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
       override def save(user: User): Try[User] = saveUser
       override def delete(user: User): Try[Unit] = deleteResult
     }
     object UserUsecaseForTest extends UserUsecaseModule {
-      override lazy val userRepository: UserRepository =
+      override lazy val userRepository: IUserRepository =
         new UserRepositoryImplForTest()
     }
 

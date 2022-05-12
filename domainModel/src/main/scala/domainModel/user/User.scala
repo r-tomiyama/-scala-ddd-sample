@@ -12,6 +12,8 @@ object User {
     new User(UserId(userId), UserName(userName))
   }
 
-  def from(userName: String): Try[User] =
-    Try(new User(UserId(), UserName(userName)))
+  def from(userName: String): Try[User] = {
+    val userId = UserId() // TODO: Guid生成ライブラリなどで生成する
+    Try(new User(userId, UserName(userName)))
+  }
 }

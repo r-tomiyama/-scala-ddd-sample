@@ -21,10 +21,3 @@ case class Circle private (
       Circle(id, name, ownerId, memberIds :+ userId)
     }
 }
-
-object Circle {
-  def from(name: String, ownerId: UserId): Try[Circle] = {
-    val id = CircleId("id") // TODO: Guid生成ライブラリなどで生成する
-    Try(Circle(id, CircleName(name), ownerId, List()))
-  }
-}

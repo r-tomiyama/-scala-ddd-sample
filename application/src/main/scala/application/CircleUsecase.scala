@@ -1,12 +1,7 @@
 package application
 
 import application.UserUsecase.userRepository
-import domainModel.circle.{
-  Circle,
-  CircleFullSpecification,
-  CircleId,
-  ICircleRepository
-}
+import domainModel.circle.{Circle, CircleFullSpecification, CircleId, ICircleFactory, ICircleRepository}
 import domainModel.user.UserId
 import domainService.CircleService
 
@@ -16,6 +11,7 @@ object CircleUsecase extends CircleUsecaseModule
 
 trait CircleUsecaseModule {
   lazy val circleRepository: ICircleRepository = ???
+  lazy val circleFactory: ICircleFactory = ???
   lazy val circleService: CircleService = ???
   lazy val circleFullSpecification: CircleFullSpecification = ???
 
@@ -26,7 +22,7 @@ trait CircleUsecaseModule {
         case Some(u) => Success(u)
         case None    => Failure(new RuntimeException("存在しないユーザーID"))
       }
-      circle <- Circle.from(circleName, user.id)
+      circle <- circleFactory.from(circleName, user.id)
       _ <- if (circleService.exist(circle))
         Failure(new RuntimeException("すでに利用されている名前"))
       else

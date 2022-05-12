@@ -9,11 +9,11 @@ case class User private (id: UserId, name: UserName) {
 
 object User {
   def apply(userId: String, userName: String): User = {
-    new User(UserId(userId), UserName(userName))
+    User(UserId(userId), UserName(userName))
   }
 
   def from(userName: String): Try[User] = {
     val userId = UserId() // TODO: Guid生成ライブラリなどで生成する
-    Try(new User(userId, UserName(userName)))
+    Try(User(userId, UserName(userName)))
   }
 }

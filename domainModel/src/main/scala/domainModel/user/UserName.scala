@@ -1,4 +1,4 @@
-package domainModel
+package domainModel.user
 
 case class UserName private (value: String)
 

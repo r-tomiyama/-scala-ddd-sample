@@ -1,4 +1,4 @@
-package domainModel
+package domainModel.user
 
 import scala.util.Try
 

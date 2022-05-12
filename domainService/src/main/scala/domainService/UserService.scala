@@ -1,6 +1,6 @@
 package domainService
 
-import domainModel.User
+import domainModel.user.User
 import infrastructure.UserRepository
 
 class UserService(val userRepository: UserRepository) {

@@ -1,6 +1,6 @@
 package application
 
-import domainModel.{User, UserId, UserName}
+import domainModel.user.{User, UserId, UserName}
 import infrastructure.UserRepository
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
@@ -12,7 +12,7 @@ class UserUsecaseSpec extends FlatSpec {
   def userUsecaseForTest(
       findUser: Option[User] = None,
       saveUser: Try[User] = Failure(new RuntimeException("")),
-      deleteResult: Try[Unit] =  Failure(new RuntimeException(""))
+      deleteResult: Try[Unit] = Failure(new RuntimeException(""))
   ): UserUsecaseModule = {
     class UserRepositoryImplForTest extends UserRepository {
       override def find(name: UserName): Option[User] = findUser

@@ -1,7 +1,7 @@
 package application
 
 import com.softwaremill.macwire.wire
-import domainModel.{User, UserId, UserName}
+import domainModel.user.{User, UserId}
 import domainService.UserService
 import infrastructure.{UserRepository, UserRepositoryImpl}
 

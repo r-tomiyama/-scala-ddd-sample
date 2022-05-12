@@ -1,6 +1,6 @@
 package domainService
 
-import domainModel.{User, UserId, UserName}
+import domainModel.user.{User, UserId, UserName}
 import infrastructure.UserRepository
 import org.scalatest.FlatSpec
 
@@ -16,6 +16,7 @@ class UserServiceSpec extends FlatSpec {
       override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
       override def save(user: User): Try[User] = saveUser
+      override def delete(user: User): Try[Unit] = Failure(new RuntimeException)
     }
     new UserService(new UserRepositoryImplForTest())
   }

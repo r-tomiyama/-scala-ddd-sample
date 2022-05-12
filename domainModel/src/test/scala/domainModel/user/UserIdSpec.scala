@@ -1,4 +1,4 @@
-package domainModel
+package domainModel.user
 
 import org.scalatest.FlatSpec
 import org.scalatest.Matchers._

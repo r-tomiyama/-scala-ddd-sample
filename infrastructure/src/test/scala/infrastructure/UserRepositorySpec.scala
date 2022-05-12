@@ -1,6 +1,6 @@
 package infrastructure
 
-import domainModel.{User, UserId}
+import domainModel.user.{User, UserId}
 import org.scalatest.FlatSpec
 
 class UserRepositorySpec extends FlatSpec {

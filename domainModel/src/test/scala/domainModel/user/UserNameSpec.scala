@@ -1,7 +1,7 @@
-package domainModel
+package domainModel.user
 
+import org.scalatest.FlatSpec
 import org.scalatest.Matchers._
-import org.scalatest.{FlatSpec}
 
 class UserNameSpec extends FlatSpec {
 

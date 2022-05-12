@@ -1,6 +1,6 @@
 package infrastructure
 
-import domainModel.{User, UserId, UserName}
+import domainModel.user.{User, UserId, UserName}
 
 import scala.util.Try
 

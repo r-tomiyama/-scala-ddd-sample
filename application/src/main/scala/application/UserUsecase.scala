@@ -1,9 +1,9 @@
 package application
 
 import com.softwaremill.macwire.wire
-import domainModel.user.{User, UserId, IUserRepository}
+import domainModel.user.{IUserRepository, User, UserId}
 import domainService.UserService
-import infrastructure.{UserRepositoryImpl}
+import infrastructure.rdb.UserRepositoryImpl
 
 import scala.util.{Failure, Success, Try}
 

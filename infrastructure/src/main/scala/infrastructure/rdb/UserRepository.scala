@@ -1,6 +1,6 @@
-package infrastructure
+package infrastructure.rdb
 
-import domainModel.user.{User, UserId, UserName, IUserRepository}
+import domainModel.user.{IUserRepository, User, UserId, UserName}
 
 import scala.util.Try
 

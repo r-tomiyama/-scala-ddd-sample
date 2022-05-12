@@ -1,4 +1,4 @@
-package infrastructure
+package infrastructure.rdb
 
 import domainModel.user.{User, UserId}
 import org.scalatest.FlatSpec

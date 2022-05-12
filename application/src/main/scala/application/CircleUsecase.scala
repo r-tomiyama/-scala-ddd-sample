@@ -20,7 +20,7 @@ trait CircleUsecaseModule {
         case Some(u) => Success(u)
         case None    => Failure(new RuntimeException("存在しないユーザーID"))
       }
-      circle <- Circle.from(circleName, user)
+      circle <- Circle.from(circleName, user.id)
       _ <- if (circleService.exist(circle))
         Failure(new RuntimeException("すでに利用されている名前"))
       else
@@ -39,7 +39,7 @@ trait CircleUsecaseModule {
         case Some(c) => Success(c)
         case None    => Failure(new RuntimeException("存在しないユーザーID"))
       }
-      updatedCircle <- circle.addUser(user)
+      updatedCircle <- circle.addUser(user.id)
       result <- circleRepository.save(updatedCircle)
     } yield result
 }

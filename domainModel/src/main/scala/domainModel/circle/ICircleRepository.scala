@@ -4,7 +4,7 @@ import scala.util.Try
 
 trait ICircleRepository {
 
-  def save(circle: Circle): Try[Circle]
+  def save(circle: Circle): Try[Unit]
 
   def find(id: CircleId): Option[Circle]
 

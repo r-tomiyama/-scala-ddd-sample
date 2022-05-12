@@ -14,6 +14,7 @@ class UserServiceSpec extends FlatSpec {
     class UserRepositoryImplForTest extends IUserRepository {
       override def find(name: UserName): Option[User] = findUser
       override def find(userId: UserId): Option[User] = findUser
+      override def find(userIds: List[UserId]): List[User] = List()
       override def save(user: User): Try[User] = saveUser
       override def delete(user: User): Try[Unit] = Failure(new RuntimeException)
     }

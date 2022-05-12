@@ -21,6 +21,9 @@ class UserRepositoryImpl extends IUserRepository {
     else
       None
 
+  def find(userIds: List[UserId]): List[User] =
+    List()
+
   def save(user: User): Try[User] =
     Try(user)
 

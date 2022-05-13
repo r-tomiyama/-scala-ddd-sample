@@ -5,7 +5,7 @@ import domainModel.user.UserId
 
 import scala.util.Try
 
-trait CircleFactory extends ICircleFactory {
+class CircleFactory extends ICircleFactory {
 
   def from(name: String, ownerId: UserId): Try[Circle] = {
     val id = CircleId("id") // TODO: シーケンスを利用して生成する

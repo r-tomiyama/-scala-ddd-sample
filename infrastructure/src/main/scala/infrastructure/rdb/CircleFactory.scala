@@ -11,5 +11,4 @@ class CircleFactory extends ICircleFactory {
     val id = CircleId("id") // TODO: シーケンスを利用して生成する
     Try(Circle(id, CircleName(name), ownerId, List()))
   }
-
 }

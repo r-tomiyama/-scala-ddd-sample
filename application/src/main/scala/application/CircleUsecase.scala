@@ -1,7 +1,13 @@
 package application
 
 import application.UserUsecase.userRepository
-import domainModel.circle.{Circle, CircleFullSpecification, CircleId, ICircleFactory, ICircleRepository}
+import domainModel.circle.{
+  Circle,
+  CircleFullSpecification,
+  CircleId,
+  ICircleFactory,
+  ICircleRepository
+}
 import domainModel.user.UserId
 import domainService.CircleService
 
@@ -55,12 +61,12 @@ trait CircleUsecaseModule {
       }
       circle <- circleRepository.find(CircleId(circleId)) match {
         case Some(c) => Success(c)
-        case None    => Failure(new RuntimeException("存在しないユーザーID"))
+        case None    => Failure(new RuntimeException("存在しないサークルID"))
       }
-      updatedCircle <- if (circleFullSpecification.isSatisfiedBy(circle))
-        circle.addUser(user.id)
+      updatedCircle <- circle.addUser(user.id)
+      result <- if (circleFullSpecification.isSatisfiedBy(updatedCircle))
+        circleRepository.save(updatedCircle)
       else Failure(new RuntimeException("仕様外"))
-      result <- circleRepository.save(updatedCircle)
     } yield result
   }
 }

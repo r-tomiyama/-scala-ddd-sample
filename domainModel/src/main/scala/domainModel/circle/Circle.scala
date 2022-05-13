@@ -10,6 +10,9 @@ case class Circle private (
     ownerId: UserId,
     memberIds: List[UserId]
 ) {
+  def changeName(newName: String): Try[Circle] =
+    Try(Circle(id, CircleName(newName), ownerId, memberIds))
+
   def isFull: Boolean =
     memberIds.size >= (30 - 1)
 

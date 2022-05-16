@@ -5,11 +5,11 @@ import application.UserUsecase
 import scala.io.StdIn
 import scala.util.{Failure, Success}
 
-object Main {
+class Cli {
   val operations =
     List("create_user", "find_user", "update_user", "delete_user")
 
-  def main(args: Array[String]): Unit = {
+  def run(): Unit = {
     println(s"行いたい操作を入力してください: ${operations.mkString(",")}")
     val input_operation = StdIn.readLine()
 

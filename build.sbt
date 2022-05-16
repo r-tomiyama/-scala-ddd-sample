@@ -20,6 +20,13 @@ lazy val root = (project in file("."))
     infrastructure,
     domainModel
   )
+  .dependsOn(
+    presentation,
+    application,
+    domainService,
+    infrastructure,
+    domainModel
+  )
 
 lazy val presentation = (project in file("presentation"))
   .settings(commonSettings)

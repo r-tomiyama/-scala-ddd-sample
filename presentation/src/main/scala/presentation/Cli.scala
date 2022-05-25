@@ -6,7 +6,6 @@ import com.google.inject.Inject
 import scala.io.StdIn
 import scala.util.{Failure, Success}
 
-@Inject
 class Cli @Inject() (userUscase: UserUsecase) {
 
   val operations =

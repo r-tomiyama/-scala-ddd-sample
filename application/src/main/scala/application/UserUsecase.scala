@@ -6,7 +6,6 @@ import domainService.UserService
 
 import scala.util.{Failure, Success, Try}
 
-@Inject
 class UserUsecase @Inject() (
     userRepository: IUserRepository,
     userService: UserService

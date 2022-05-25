@@ -12,7 +12,6 @@ import domainService.{CircleService}
 
 import scala.util.{Failure, Success, Try}
 
-@Inject
 class CircleUsecase @Inject() (
     userRepository: IUserRepository,
     circleRepository: ICircleRepository,
